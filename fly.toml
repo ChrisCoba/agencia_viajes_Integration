@@ -13,12 +13,14 @@ console_command = 'php /var/www/html/artisan tinker'
     PHP_VERSION = '8.2'
 
 [env]
-  APP_ENV = 'production'
-  LOG_CHANNEL = 'stderr'
-  LOG_LEVEL = 'info'
-  LOG_STDERR_FORMATTER = 'Monolog\Formatter\JsonFormatter'
-  SESSION_DRIVER = 'cookie'
-  SESSION_SECURE_COOKIE = 'true'
+APP_ENV = "agencia"
+APP_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJuZnJ2bHFoaXh6Z3FmdHhsbHlvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE1MjkzMDUsImV4cCI6MjA3NzEwNTMwNX0.mTKR2Rye5ffgwfz-_Q7kN7lfdpv_H2PzH38eGVoyaF4"
+DB_CONNECTION = "pgsql"
+DB_HOST = "db.bnfrvlqhixzgqftxllyo.supabase.co"
+DB_PORT = "5432"
+DB_DATABASE = "postgres"
+DB_USERNAME = "postgres"
+DB_PASSWORD = "patolin3791"
 
 [http_service]
   internal_port = 8080
