@@ -1,0 +1,42 @@
+travel-agency
+├── app
+│   ├── Console
+│   │   └── Commands
+│   ├── Http
+│   │   ├── Controllers
+│   │   │   ├── Admin
+│   │   │   ├── Api
+│   │   │   └── Frontend
+│   │   ├── Middleware
+│   │   └── Requests
+│   ├── Models
+│   ├── Providers
+│   └── Services
+│       ├── Integration
+│       │   ├── Payment
+│       │   └── Booking
+│       └── Management
+│           ├── Inventory
+│           └── Reporting
+├── config
+├── database
+│   ├── factories
+│   ├── migrations
+│   └── seeders
+├── resources
+│   ├── css
+│   ├── js
+│   └── views
+│       ├── admin
+│       ├── layouts
+│       └── frontend
+├── routes
+│   ├── api.php
+│   └── web.php
+├── tests
+│   ├── Feature
+│   └── Unit
+├── .env
+├── composer.json
+├── phpunit.xml
+└── README.md

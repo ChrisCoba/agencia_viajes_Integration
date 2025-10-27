@@ -1,0 +1,44 @@
+<definitions name="ReservaService"
+             targetNamespace="http://agencia.com/soap/reserva"
+             xmlns:tns="http://agencia.com/soap/reserva"
+             name="ReservaDTO">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:int"/>
+                    <xsd:element name="codigo" type="xsd:string"/>
+                    <xsd:element name="usuarioId" type="xsd:int"/>
+                    <xsd:element name="subtotal" type="xsd:float"/>
+                    <xsd:element name="total" type="xsd:float"/>
+                    <xsd:element name="estado" type="xsd:string"/>
+                </xsd:sequence>
+           complexType>
+        </xsd:schema>
+    </types>
+
+    <message name="crearReservaRequest">
+        <part name="reserva" element="tns:ReservaDTO"/>
+    </message>
+    <message name="crearReservaResponse">
+        <part name="id" type="xsd:int"/>
+    </message>
+
+    <portType name="ReservaPortType">
+        <operation name="crearReserva">
+            <input message="tns:crearReservaRequest"/>
+            <output message="tns:crearReservaResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="ReservaBinding" type="tns:ReservaPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="crearReserva">
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+    </binding>
+
+    <service name="ReservaService">
+        <port name="ReservaPort" binding="tns:ReservaBinding">
+            <soap:address location="http://tu-dominio.com/soap/reserva"/>
+        </port>
+    </service>
+</definitions>

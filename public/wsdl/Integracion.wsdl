@@ -1,0 +1,91 @@
+<definitions name="IntegracionService"
+             targetNamespace="http://agencia.com/soap/integracion"
+             xmlns:tns="http://agencia.com/soap/integracion"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <types>
+        <xsd:schema targetNamespace="http://agencia.com/soap/integracion">
+            <xsd:complexType name="CotizacionDTO">
+                <xsd:sequence>
+                    <xsd:element name="total" type="xsd:float"/>
+                    <xsd:element name="breakdown" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PreReservaDTO">
+                <element name="preBookingId" type="xsd:string"/>
+                    <xsd:element name="expiraEn" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ReservaIntegracionDTO">
+                <xsd:sequence>
+                    <xsd:element name="bookingId" type="xsd:string"/>
+                    <xsd:element name="estado" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </types>
+
+    <message name="cotizarReservaRequest">
+        <part name="items" type="xsd:string"/>
+    </message>
+    <message name="cotizarReservaResponse">
+        <part name="cotizacion" element="tns:CotizacionDTO"/>
+    </message>
+
+    <message name="crearPreReservaRequest">
+        <part name="itinerario" type="xsd:string"/>
+        <part name="cliente" type="xsd:string"/>
+        <part name="holdMinutes" type="xsd:int"/>
+    </message>
+    <message name="crearPreReservaResponse">
+        <part name="preReserva" element="tns:PreReservaDTO"/>
+    </message>
+
+    <message name="confirmarReservaRequest">
+        <part name="preBookingId" type="xsd:string"/>
+        <part name="metodoPago" type="xsd:string"/>
+        <part name="datosPago" type="xsd:string"/>
+    </message>
+    <message name="confirmarReservaResponse">
+        <part name="reserva" element="tns:ReservaIntegracionDTO"/>
+    </message>
+
+    <portType name="IntegracionPortType">
+        <operation name="cotizarReserva">
+            <input message="tns:cotizarReservaRequest"/>
+            <output message="tns:cotizarReservaResponse"/>
+        </operation>
+        <operation name="crearPreReserva">
+            <input message="tns:crearPreReservaRequest"/>
+            <output message="tns:crearPreReservaResponse"/>
+        </operation>
+        <operation name="confirmarReserva">
+            <input message="tns:confirmarReservaRequest"/>
+            <output message="tns:confirmarReservaResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="IntegracionBinding" type="tns:IntegracionPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="cotizarReserva">
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+        <operation name="crearPreReserva">
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+        <operation name="confirmarReserva">
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+    </binding>
+
+    <service name="IntegracionService">
+        <port name="IntegracionPort" binding="tns:IntegracionBinding">
+            <soap:address location="http://tu-dominio.com/soap/integracion"/>
+        </port>
+    </service>
+</definitions>

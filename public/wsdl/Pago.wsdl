@@ -1,0 +1,50 @@
+<definitions name="PagoService"
+             targetNamespace="http://agencia.com/soap/pago"
+             xmlns:tns="http://agencia.com/soap/pago"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <types>
+        <xsd:schema targetNamespace="http://agencia.com/soap/pago">
+            <xsd:complexType name="PagoDTO">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:int"/>
+                    <xsd:element name="reservaId" type="xsd:int"/>
+                    <xsd:element name="metodoPagoId" type="xsd:int"/>
+                    <xsd:element name="monto" type="xsd:float"/>
+                    <xsd:element name="referencia" type="xsd:string"/>
+                    <xsd:element name="estado" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </types>
+
+    <message name="crearPagoRequest">
+        <part name="pago" element="tns:PagoDTO"/>
+    </message>
+    <message name="crearPagoResponse">
+        <part name="id" type="xsd:int"/>
+    </message>
+
+    <portType name="PagoPortType">
+        <operation name="crearPago">
+            <input message="tns:crearPagoRequest"/>
+            <output message="tns:crearPagoResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="PagoBinding" type="tns:PagoPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="crearPago">
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+    </binding>
+
+    <service name="PagoService">
+        <port name="PagoPort" binding="tns:PagoBinding">
+            <soap:address location="http://tu-dominio.com/soap/pago"/>
+        </port>
+    </service>
+</definitions>

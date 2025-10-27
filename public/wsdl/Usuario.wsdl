@@ -1,0 +1,53 @@
+<definitions name="UsuarioService"
+             targetNamespace="http://agencia.com/soap/usuario"
+             xmlns:tns="http://agencia.com/soap/usuario"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <types>
+        <xsd:schema targetNamespace="http://agencia.com/soap/usuario">
+            <xsd:complexType name="UsuarioDTO">
+                <xsd:sequence>
+                    <xsd:element name="idUsuario" type="xsd:int"/>
+                    <xsd:element name="nombre" type="xsd:string"/>
+                    <xsd:element name="apellido" type="xsd:string"/>
+                    <xsd:element name="email" type="xsd:string"/>
+                    <xsd:element name="telefono" type="xsd:string"/>
+                    <xsd:element name="direccion" type="xsd:string"/>
+                    <xsd:element name="ciudad" type="xsd:string"/>
+                    <xsd:element name="pais" type="xsd:string"/>
+                    <xsd:element name="activo" type="xsd:boolean"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </types>
+
+    <message name="crearUsuarioRequest">
+        <part name="usuario" element="tns:UsuarioDTO"/>
+    </message>
+    <message name="crearUsuarioResponse">
+        <part name="id" type="xsd:int"/>
+    </message>
+
+    <portType name="UsuarioPortType">
+        <operation name="crearUsuario">
+            <input message="tns:crearUsuarioRequest"/>
+            <output message="tns:crearUsuarioResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="UsuarioBinding" type="tns:UsuarioPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="crearUsuario">
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+    </binding>
+
+    <service name="UsuarioService">
+        <port name="UsuarioPort" binding="tns:UsuarioBinding">
+            <soap:address location="http://tu-dominio.com/soap/usuario"/>
+        </port>
+    </service>
+</definitions>
