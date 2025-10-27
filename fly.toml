@@ -1,36 +1,31 @@
-# fly.toml app configuration file generated for agencia on 2025-10-27T11:22:48-05:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
-app = 'agencia'
-primary_region = 'dfw'
-console_command = 'php /var/www/html/artisan tinker'
+# fly.toml app configuration file
+app = "agencia"
+primary_region = "dfw"
+console_command = "php /var/www/html/artisan tinker"
 
 [build]
   [build.args]
-    NODE_VERSION = '18'
-    PHP_VERSION = '8.2'
+    NODE_VERSION = "18"
+    PHP_VERSION = "8.2"
 
 [env]
-APP_ENV = "agencia"
-APP_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJuZnJ2bHFoaXh6Z3FmdHhsbHlvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE1MjkzMDUsImV4cCI6MjA3NzEwNTMwNX0.mTKR2Rye5ffgwfz-_Q7kN7lfdpv_H2PzH38eGVoyaF4"
+APP_ENV = "production"
 DB_CONNECTION = "pgsql"
 DB_HOST = "db.bnfrvlqhixzgqftxllyo.supabase.co"
 DB_PORT = "5432"
 DB_DATABASE = "postgres"
 DB_USERNAME = "postgres"
-DB_PASSWORD = "patolin3791"
+DB_SSLMODE = "require"
 
 [http_service]
   internal_port = 8080
   force_https = true
-  auto_stop_machines = 'stop'
+  auto_stop_machines = "stop"
   auto_start_machines = true
   min_machines_running = 0
-  processes = ['app']
+  processes = ["app"]
 
 [[vm]]
-  memory = '1gb'
-  cpu_kind = 'shared'
+  memory = "1gb"
+  cpu_kind = "shared"
   cpus = 1
